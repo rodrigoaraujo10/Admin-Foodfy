@@ -1,0 +1,39 @@
+{% extends 'layoutAdmin.njk' %}
+
+{% block head%}
+
+    <title>Receitas - Foodfy</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+rel="stylesheet">
+{% endblock %}
+
+    {% block content %}
+
+        <h3 id="adminTitle">Gerenciar Receitas</h3>
+     
+
+         <section class="cards">
+
+        {% for item in items %} 
+    
+    <div class="card" id="{{item.title}}">
+        <a href="/admin/recipes/{{items.indexOf(item)}}">
+        <div class="imgCard">
+            <img src="{{item.image}}" alt="">
+        </div>
+        </a>
+        <div class="recipe">
+            <p class="title">{{item.title}}</p>
+             <a>Visualizar</a>
+            <p class="chef">{{item.author}}</p>
+           
+        </div>
+    </div>
+    
+                
+        {% endfor %}
+
+        </section>
+
+    {% endblock content %}

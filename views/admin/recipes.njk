@@ -1,0 +1,37 @@
+{% extends 'layout.njk' %}
+
+{% block head%}
+
+    <title>Receitas - Foodfy</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+rel="stylesheet">
+{% endblock %}
+
+    {% block content %}
+
+         <section class="cards">
+
+        {% for item in items %} 
+   
+    <div class="card" id="{{item.title}}">
+        <div class="imgCard">
+        <a href="/admin/recipes/{{items.indexOf(item)}}">
+            <img src="{{item.image}}" alt="">
+        </a>
+        </div>
+        <div class="recipe">
+            <p class="title">{{item.title}}</p>
+            <p class="chef">{{item.author}}</p>
+        </div>
+    </div>
+    
+                
+        {% endfor %}
+
+        </section>
+
+        <script src="\scripts.js"></script>
+
+
+    {% endblock %}
