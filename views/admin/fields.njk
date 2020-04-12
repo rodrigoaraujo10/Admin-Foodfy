@@ -1,0 +1,76 @@
+<div class="item">
+    <div>Imagem da receita</div>
+    <div>
+        <input type="url" name="recipe_url" value="" placeholder="http://">
+    </div>
+</div>
+
+<div id="ingredients">
+  <div class="ingredient">
+    <input type="text" name="ingredients[]" value="" placeholder="Ingrediente" />
+  </div>
+</div>
+<button type="button" class="add-ingredient">Adicionar Ingrediente</button>
+
+<div id="preparationMethod">
+  <div class="preparations">
+    <input type="text" name="preparation[]" value="" placeholder="Modo de Preparo" />
+  </div>
+</div>
+<button type="button" class="add-method">Adicionar Passo</button>
+
+
+<div class="item">
+    <div>Informações adicionais</div>
+    <div>
+        <input type="text" name="aditional-information" value="" placeholder="Informações adicionais">
+    </div>
+</div>
+
+<script>
+      function addIngredient() {
+    const ingredients = document.querySelector("#ingredients");
+    const fieldContainer = document.querySelectorAll(".ingredient");
+  
+    // Realiza um clone do último ingrediente adicionado
+    const newField = fieldContainer[fieldContainer.length - 1].cloneNode(true);
+  
+    // Não adiciona um novo input se o último tem um valor vazio
+    if (newField.children[0].value == "") return false;
+  
+    // Deixa o valor do input vazio
+    newField.children[0].value = "";
+    ingredients.appendChild(newField);
+  }
+  
+  document
+    .querySelector(".add-ingredient")
+    .addEventListener("click", addIngredient);
+    
+ 
+
+   
+   function addPreparation() {
+    const preparationMethod = document.querySelector("#preparationMethod");
+    const fieldContainer = document.querySelectorAll(".preparations");
+  
+    // Realiza um clone do último ingrediente adicionado
+    const newField = fieldContainer[fieldContainer.length - 1].cloneNode(true);
+  
+    // Não adiciona um novo input se o último tem um valor vazio
+    if (newField.children[0].value == "") return false;
+  
+    // Deixa o valor do input vazio
+    newField.children[0].value = "";
+    preparationMethod.appendChild(newField);
+  }
+  
+  document
+    .querySelector(".add-method")
+    .addEventListener("click", addPreparation);  
+
+
+
+</script>
+
+
