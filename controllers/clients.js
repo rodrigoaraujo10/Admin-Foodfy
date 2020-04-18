@@ -1,11 +1,11 @@
-const recipes = require('../data.json')
+const data = require('../data')
 
 exports.index = function (req, res){
     
     let recipesLimited = []
 
     for(let i = 0; i < 6; i ++) {
-        recipesLimited.push(recipes[i])
+        recipesLimited.push(data.recipes[i])
     }
     
     return res.render('./clients/home', {items: recipesLimited})
@@ -15,7 +15,7 @@ exports.index = function (req, res){
 exports.show =  function(req, res){
     const { index: recipeIndex } = req.params
 
-    const recipe = recipes[recipeIndex]
+    const recipe = data.recipes[recipeIndex]
 
     if (!recipe) return res.send('Recipe not found')
 
@@ -25,5 +25,5 @@ exports.show =  function(req, res){
 }
 
 exports.list =  function(req, res){
-    return res.render('clients/recipes', { items: recipes })
+    return res.render('clients/recipes', { items: data.recipes })
 }

@@ -374,6 +374,7 @@ footer p {
     color: white;
     max-width: 200px;
     min-height: 32px;
+    display: inline;
 }
 
 .item {
@@ -414,5 +415,10 @@ footer p {
     size: 16px;
     line-height: 19px;
     color: #6558C3;
+    cursor: pointer;
+}
+
+#buttonDelete {
+    background-color: red;
     cursor: pointer;
 }
