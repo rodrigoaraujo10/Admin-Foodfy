@@ -1,0 +1,30 @@
+{% extends 'layoutAdmin.njk'%}
+
+
+{% block content %}
+    <form method="POST" action="/admin">
+        <div class="adminHeader">
+        <h3>Criar Chef</h3>
+        <button type="submit">Salvar Chef</button>
+        </div>
+        
+    <div class="item">
+        <div>Nome</div>
+        <div>
+            <input type="text" name="name" value="" placeholder="{{recipe.image}}">
+        </div>
+    </div>
+
+    <div id="exceptionItems" class="item">
+        <div>Avatar</div>
+        <div>
+            <input type="url" name="avatar_url" value="" placeholder="{{recipe.image}}">
+        </div>
+    </div>
+
+  
+
+        </form>
+
+    
+{% endblock content %}

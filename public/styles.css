@@ -58,9 +58,10 @@ h1 {
     font-family: 'Roboto-Bold', sans-serif;
     font-size: 24px;
     line-height: 28px;
-    margin-top: 50px;
-    margin-left: 480px;
+    /* margin-top: 50px; */
+    /*margin-left: 480px;*/
     margin-bottom: 20px;
+    padding: 16px;
     
 }
 
@@ -135,10 +136,6 @@ footer p {
 
 }
 
-.titles {
-    margin-left: 490px;
-}
-
 .modal-overlay { 
     background-color: rgba(0, 0, 0, 0.6);
     width: 100%;
@@ -208,9 +205,10 @@ footer p {
     min-height: 85vh;
     display: block;
     max-width: 940px;
-
-
+    position: relative;
 }
+
+.container h3
 
 .hide {
     display: none;
@@ -261,6 +259,9 @@ footer p {
     color: #111111;
 }
 
+.topic h3 {
+    margin: 16px 8px 16px 0px;
+}
 .topic h4 {
     font-family: 'Roboto-Bold',sans-serif;
     font-size: 12px;
@@ -300,27 +301,47 @@ footer p {
 
 /* == ADMIN ONLY*/
 
-
-#logoAdmin {
-    min-height: 80px;
-    background-color: black;
-    margin-bottom: 32px;
-    
+.adminHeader {
+    height: 80px;
+    background-color: #111111;
 }
 
-#logoAdmin img {
+.links {
+    max-width: 940px;
+    margin: 0 auto;
     padding: 32px;
-    margin-left: 460px;
+    display: grid;
+    grid-template-columns: 120px 120px 120px;
+    align-items: center;
 }
 
-.adminTitle {
+.links a {
     font-family: 'Roboto-Bold', sans-serif;
-    color: #111111;
-    font-size: 24px;
-    line-height: 28px;
-    margin-bottom: 30px;
-    
+    text-decoration: none;
+    color: #FFFFFF;
+    font-size: 15px;
 }
+
+
+
+.admin-titles {
+    margin: 56px 0 32px 0;
+
+}
+
+form button[type=submit] {
+    position: absolute;
+    top: 54px;
+    right: 50px;
+    border-radius: 4px 4px;
+    background-color: #6558C3;
+    width: 121px;
+    height: 37px;
+    color: white;
+    font-family: 'Roboto-Bold', sans-serif;    
+}
+
+
 
 .recipe {
     display: grid;
@@ -337,49 +358,13 @@ footer p {
     text-decoration: none;
 }
 
-.adminTop {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    justify-items: right;
-}
-
-.adminTop button {
-    margin-bottom: 16px;
-    background-color: #6558C3;
-    border-radius: 4px 4px;
-    font-family: 'Roboto-Bold', sans-serif;
-    size: 16px;
-    line-height: 19px;
-    letter-spacing: 0;
-    color: white;
-    min-width: 240px;
-
-   
-
-}
-
-.adminTop-create {
-    display: grid;
-    grid-template-columns: 2fr 2fr;
-}
 
 
-.adminTop-create button {
-    background-color: #6558C3;
-    border-radius: 4px 4px;
-    font-family: 'Roboto-Bold', sans-serif;
-    size: 16px;
-    line-height: 19px;
-    letter-spacing: 0;
-    color: white;
-    max-width: 200px;
-    min-height: 32px;
-    display: inline;
-}
 
 .item {
     margin-top: 32px;
     font-family: 'Roboto-Bold', sans-serif;
+    position: relative;
     
 }
 
@@ -397,7 +382,13 @@ footer p {
     height: 37px;
     border-radius: 6px;
     margin-top: 16px;
+    padding-left: 8px;
 }
+
+#informations {
+    height: 257px;
+}
+
 .preparations input,
 .ingredient input {
     border: 1px solid rgba(0, 0, 0, 0.1);
@@ -407,6 +398,7 @@ footer p {
     border-radius: 6px;
     margin-top: 16px;
     margin-bottom: 8px;
+    padding-left: 8px;
 }
 .add-method,
 .add-ingredient {
@@ -421,4 +413,17 @@ footer p {
 #buttonDelete {
     background-color: red;
     cursor: pointer;
+}
+
+.botao {
+    cursor: pointer;
+}
+
+/* CHEFS */
+
+ #exceptionItems input {
+    min-height: unset;
+    size: 16px;
+    color: #111111;
+    line-height: 19px;
 }
