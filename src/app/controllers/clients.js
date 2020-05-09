@@ -1,31 +1,30 @@
+const Client = require('../models/Client')
+
 module.exports = {
     index(req, res){
-    
-        let recipesLimited = []
-    
-        for(let i = 0; i < 6; i ++) {
-            recipesLimited.push(data.recipes[i])
-        }
-        
-        return res.render('./clients/home', {items: recipesLimited})
+        Client.all(function(recipes) {
+            return res.render('clients/index', { recipes })
+        })
+       
     
     },
     show(req, res){
-        const { index: recipeIndex } = req.params
+        Client.find(req.params.id, function(recipe) {
+            if(!recipe) return res.send('Recipe not found!')
+
+            return res.render('clients/recipe', { recipe })
+        })
     
-        const recipe = data.recipes[recipeIndex]
-    
-        if (!recipe) return res.send('Recipe not found')
-    
-      
-    
-        return res.render("clients/recipe", { item: recipe})
     },
     list(req, res){
         return res.render('clients/recipes', { items: data.recipes })
     },
     about(req, res) {
         return res.render('clients/about')
+    },
+
+    chefs(req, res){
+        return res.render('clients/chefs')
     }
 
 }

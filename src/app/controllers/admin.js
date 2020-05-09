@@ -2,13 +2,11 @@ const Administration = require('../models/Administration')
 
 module.exports = {
     index(req, res){
-        return res.render('admin/index', {items: data.recipes})
+        Administration.all(function(recipes){
+            return res.render('admin/index', { recipes })
+        }) 
+        
     
-        // const { index: recipeIndex } = req.params
-    
-        // const recipe = recipes[recipeIndex]
-    
-        // if (!recipe) return res.send('Recipe not found')
     },
 
     show(req, res) {
@@ -24,36 +22,35 @@ module.exports = {
     },
 
     edit(req, res) {
-        const { id } = req.params
-    
-        const foundRecipe = data.recipes.find(function(recipe){
-            return id == recipe.id
-         })
-        
-        if  (!foundRecipe) return res.send('Recipe not found')
-    
-        const recipe = {
-            ...foundRecipe,
-            id,
-        }
-    
-        return res.render(`admin/edit`, { recipe })
-    
+       Administration.find(req.params.id, function(recipe) {
+           if(!recipe) return res.send("Recipe not found")
+
+        Administration.chefSelectOptions(function(options) {
+            return res.render('admin/edit', {chefOptions: options, recipe})
+
+       })
+
+        })
     },
+    
+    
 
     create(req, res){
-        return res.render('admin/create')
+        Administration.chefSelectOptions(function(options) {
+            return res.render('admin/create', {chefOptions: options})
+        
+        })
     },
     
     post(req, res){
 
-        const keys = Object.keys(req.body)
+        // const keys = Object.keys(req.body)
     
-        for (key of keys) {
-            if (req.body[key] == "") {
-                return res.send('Por favor, preencha todos os campos')
-            }
-        } 
+        // for (key of keys) {
+        //     if (req.body[key] == "") {
+        //         return res.send('Por favor, preencha todos os campos')
+        //     }
+        // } 
         
         Administration.create(req.body, function(recipe) {
             return res.redirect(`/admin/recipes/${recipe.id}`)
@@ -62,47 +59,58 @@ module.exports = {
     },
 
     put(req, res){
-        const { id } = req.body
-        let index = 0
-        
-        const foundRecipe = data.recipes.find(function(recipe, foundIndex){
-            if ( id == recipe.id) {
-                index = foundIndex
-                return true    
-            }
-         })
-        
-        if  (!foundRecipe) return res.send('Recipe not found')
-    
-        const recipe = {
-            ...foundRecipe,
-            ...req.body,
-            id: Number(req.body.id),
-        }
-    
-        data.recipes[index] = recipe
-    
-        fs.writeFile('data.json', JSON.stringify(data, null, 2), function(err) {
-            if (err) return res.send('Write file error')
-        })
-    
-        return res.redirect(`/admin/recipes/${id}`)
+    //   const keys = Object.keys(req.body)
+
+    //   for (key of keys) {
+    //       if (req.body[key] == "") {
+    //           return res.send('Por favor, preencha todos os campos')
+    //       }
+    //   }
+
+      Administration.update(req.body, function() {
+          return res.redirect(`/admin/recipes/${req.body.id}`)
+      })
     
     },
     
     delete(req, res) {
-        const { id } = req.body
-    
-        const filteredRecipes = data.recipes.filter(function(recipe) {
-            return recipe.id != id
+        Administration.delete(req.body.id, function() {
+            return res.redirect(`/admin`)
         })
+},
+
+
+
+    createChef(req, res) {
+        return res.render('admin/createChef')
+    },
+
+    postChef(req, res) {
+        const keys = Object.keys(req.body)
     
-        data.recipes = filteredRecipes
-    
-        fs.writeFile("data.json", JSON.stringify(data, null, 2), function(err) {
-            if (err) return res.send('Write file error')
-    
-            return res.redirect('/admin')
+        for (key of keys) {
+            if (req.body[key] == "") {
+                return res.send('Por favor, preencha todos os campos')
+            }
+        } 
+        Administration.createChef(req. body, function(chef) {
+            return res.redirect(`admin/chefs/${chef.id}`)
         })
-    }
+    },
+    
+    showChef(req, res) {
+        Administration.findChef(req.params.id, function(chef) {
+            if(!chef) return res.send('Chef not found!')
+
+        
+            return res.render('admin/detailChef', { chef })   
+
+        })
+            
+
+    },
+
+   
+
+
 }

@@ -11,19 +11,22 @@ rel="stylesheet">
 
     {% block content %}
 
+
+    </form>
+
     <section class="cards">
 
-        {% for item in items %} 
+        {% for recipe in recipes %} 
     
-    <div class="card" id="{{item.title}}">
-        <a href="/recipes/{{items.indexOf(item)}}">
+    <div class="card" id="{{recipe.title}}">
+        <a href="/recipes/{{recipe.id}}">
         <div class="imgCard">
-            <img src="{{item.image}}" alt="">
+            <img src="{{recipe.image}}" alt="">
         </div>
         </a>
         <div class="recipe">
-            <p class="title">{{item.title}}</p>
-            <p class="chef">{{item.author}}</p>
+            <p class="title">{{recipe.title}}</p>
+            <p class="chef">{{recipe.chef}}</p>
         </div>
     </div>
           

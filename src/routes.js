@@ -2,7 +2,6 @@ const express = require ('express')
 const routes = express.Router()
 const admin = require('./app/controllers/admin')
 const clients = require('./app/controllers/clients')
-const chefs = require('./app/controllers/chefs')
 
 //const recipes = require('./data')
 
@@ -12,9 +11,14 @@ routes.get('/', clients.index)
 
 routes.get('/recipes', clients.list)
 
-routes.get('/recipes/:index', clients.show)
+routes.get('/recipes/:id', clients.show)
 
 routes.get('/about', clients.about)
+
+
+
+
+routes.get('/chefs', clients.chefs)
 
 
 
@@ -33,8 +37,9 @@ routes.delete("/admin/recipes", admin.delete); // Deletar uma receita
 
 // ============ ROTAS CHEFS ============
 
-routes.get("/admin/chefs/create", chefs.create)
-routes.get("/admin/chefs/detail", chefs.detailChef)
+routes.get("/admin/chefs/create", admin.createChef)
+routes.post("/admin/chefs/", admin.postChef)
+routes.get("/admin/chefs/:id", admin.showChef)
 
 
 module.exports = routes

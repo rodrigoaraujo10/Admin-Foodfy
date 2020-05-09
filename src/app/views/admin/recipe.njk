@@ -8,8 +8,12 @@
 {% block content %}
         
         <div class="adminTop">
-            <h3 class="adminTitle">Receita: {{recipe.title}}</h3>
-           <button>EDITAR</button>
+            <h3 class="admin-titles">Receita: {{recipe.title}}</h3>
+           
+        <a href="/admin/recipes/{{recipe.id}}/edit">
+           <button class="buttons" >EDITAR</button>
+        </a>
+           
         </div>
 
     <div class="recipeDetail">

@@ -1,13 +1,9 @@
 {% extends 'layoutAdmin.njk' %}
 
 {% block content %}
-    <div class="adminHeader">
-     <h3>Editar Receita</h3>
 
-   
-    </div>
+     <h3 class="admin-titles">Editar Receita</h3>
 
-    
     <form method="POST" action="/admin/recipes?_method=PUT">
      
         {% include 'admin/fields.njk' %}
@@ -18,7 +14,7 @@
  
     <form action="/admin/recipes?_method=DELETE" method="POST">
         
-        <button type="submit">Deletar Receita</button>
+        <button class="btn-delete" type="submit">Deletar Receita</button>
         <input type="hidden" name="id" value="{{recipe.id}}">
         
         </form>
