@@ -44,13 +44,13 @@ module.exports = {
     
     post(req, res){
 
-        // const keys = Object.keys(req.body)
+        const keys = Object.keys(req.body)
     
-        // for (key of keys) {
-        //     if (req.body[key] == "") {
-        //         return res.send('Por favor, preencha todos os campos')
-        //     }
-        // } 
+        for (key of keys) {
+            if (req.body[key] == "") {
+                return res.send('Por favor, preencha todos os campos')
+            }
+        } 
         
         Administration.create(req.body, function(recipe) {
             return res.redirect(`/admin/recipes/${recipe.id}`)
@@ -59,13 +59,13 @@ module.exports = {
     },
 
     put(req, res){
-    //   const keys = Object.keys(req.body)
+      const keys = Object.keys(req.body)
 
-    //   for (key of keys) {
-    //       if (req.body[key] == "") {
-    //           return res.send('Por favor, preencha todos os campos')
-    //       }
-    //   }
+      for (key of keys) {
+          if (req.body[key] == "") {
+              return res.send('Por favor, preencha todos os campos')
+          }
+      }
 
       Administration.update(req.body, function() {
           return res.redirect(`/admin/recipes/${req.body.id}`)
@@ -102,12 +102,12 @@ module.exports = {
         Administration.findChef(req.params.id, function(chef) {
             if(!chef) return res.send('Chef not found!')
 
-        
             return res.render('admin/detailChef', { chef })   
 
+        
         })
-            
-
+        
+        
     },
 
    
