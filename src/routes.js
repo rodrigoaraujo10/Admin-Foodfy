@@ -15,9 +15,6 @@ routes.get('/recipes/:id', clients.show)
 
 routes.get('/about', clients.about)
 
-
-
-
 routes.get('/chefs', clients.chefs)
 
 
@@ -39,7 +36,11 @@ routes.delete("/admin/recipes", admin.delete); // Deletar uma receita
 
 routes.get("/admin/chefs/create", admin.createChef)
 routes.post("/admin/chefs/", admin.postChef)
+routes.get("/admin/chefs", admin.listChefs)
 routes.get("/admin/chefs/:id", admin.showChef)
+routes.get("/admin/chefs/:id/edit", admin.editChef)
+routes.delete("/admin/chefs", admin.deleteChef)
+
 
 
 module.exports = routes

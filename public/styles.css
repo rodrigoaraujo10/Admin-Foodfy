@@ -456,6 +456,7 @@ footer p {
     width: 100%;
     height: 100%;
     border-radius: 50%;
+    object-fit: cover;
     
 }
 
@@ -469,4 +470,93 @@ footer p {
 #wrapper h1 {
     margin-bottom: 0;
     padding-bottom: 0px;
+}
+
+/* LISTAGEM DE CHEFES */
+
+.wrapper-chefs {
+    width: 940px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 35px;
+}
+
+.wrapper-chefs .chef-card {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+}
+
+.wrapper-chefs .chef-card img {
+    height: 100px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.wrapper-chefs .chef-card p {
+    margin-bottom: 16px;
+}
+
+.wrapper-chefs .chef-card a {
+    text-decoration: none;
+    font-size: 14px;
+    color: #6558C3;
+    line-height: 16px;
+}
+
+
+.chefsList {
+    font-size: 15px;
+}
+
+#chefsList {
+    font-size: 12px;
+}
+
+/* PHOTOS UPLOAD */
+
+form .item #photos-upload {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    width: 100%;  
+}
+
+#photos-preview i {
+    border: 1px solid lightgrey;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6b6b6b;
+}
+
+form .item #photos-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    overflow: hidden;
+    opacity: 1;
+    cursor: pointer;
+}
+
+#photos-preview {
+    height: 100px;
+    width: 100%;
+    background-color: lightgreen;
+    /* position: absolute; */
+    left: 110px;
+    top: 26px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 8px;
+    margin: 8px auto;
 }

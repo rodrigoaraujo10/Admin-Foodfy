@@ -2,10 +2,20 @@ const Client = require('../models/Client')
 
 module.exports = {
     index(req, res){
-        Client.all(function(recipes) {
-            return res.render('clients/index', { recipes })
-        })
-       
+        const { filter } = req.query
+
+        if ( filter ) {
+            Client.findBy(filter, function(recipes) {
+                return res.render('clients/index2', { recipes, filter })
+
+            })
+        }else {
+            Client.all(function(recipes) {
+                return res.render('clients/index', { recipes })
+            })
+           
+        }
+      
     
     },
     show(req, res){
@@ -17,14 +27,20 @@ module.exports = {
     
     },
     list(req, res){
-        return res.render('clients/recipes', { items: data.recipes })
+        Client.all(function(recipes) {
+            return res.render('clients/recipes', { recipes })
+        })
     },
     about(req, res) {
         return res.render('clients/about')
     },
 
     chefs(req, res){
-        return res.render('clients/chefs')
+        Client.allChefs(function(chefs) {
+            
+            return res.render('clients/chefs', { chefs })
+
+        })
     }
 
 }

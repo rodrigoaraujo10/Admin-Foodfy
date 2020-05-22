@@ -1,1 +1,27 @@
 {% extends 'layoutChefs.njk' %}
+
+{% block content %}
+    
+    <h3 class="admin-titles">Chefs</h3>
+
+    <div class="wrapper-chefs">
+        {% for chef in chefs %}
+            <div class="chef-card">
+                <img src="{{chef.avatar_url}}" alt="{{chef.name}}">
+                <div>
+                    <p class="chefsList">{{chef.name}}</p>
+                    
+                    {%if chef.total_recipes > 1%}
+                        <p id="chefsList">{{chef.total_recipes}} Receitas</p>
+                    {% else %}
+                        <p id="chefsList">{{chef.total_recipes}} Receita</p>
+                    {% endif %}
+                                    
+                </div>
+                
+            </div>
+        
+        {% endfor %}
+    </div>
+
+{% endblock content %}

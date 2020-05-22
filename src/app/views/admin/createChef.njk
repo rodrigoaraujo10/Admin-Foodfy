@@ -1,31 +1,17 @@
-{% extends 'layoutAdmin.njk'%}
+{% extends 'layoutChefs.njk'%}
 
+    {% block content %}
 
-
-
-{% block content %}
-    
-    <form method="POST" action="/admin/chefs">
+<form method="POST" action="/admin/chefs">
         <h3 class="admin-titles">Criar Chef</h3>
-        <button class="buttons" type="submit">Salvar Chef</button>
         
-    <div class="item">
-        <div>Nome</div>
-        <div>
-            <input type="text" name="name">
-        </div>
-    </div>
-
-    <div id="exceptionItems" class="item">
-        <div>Avatar</div>
-        <div>
-            <input type="url" name="avatar_url">
-        </div>
-    </div>
-
-  
-
-        </form>
-
+            {% include 'admin/fieldsChef.njk'%}
     
-{% endblock content %}
+    
+    <button class="buttons" type="submit">Salvar Chef</button>
+
+</form>
+
+    {% endblock content %}
+
+        

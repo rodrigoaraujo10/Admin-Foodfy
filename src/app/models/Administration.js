@@ -4,15 +4,21 @@ const db = require('../../config/db')
 
 module.exports = {
     all(callback) {
-        db.query(`
-        SELECT chefs.*, count(recipes) AS total_recipes
-        FROM chefs
-        LEFT JOIN recipes ON (recipes.chef_id = chefs.id)
-        GROUP BY chefs.id`, function(err, results) {
-                if(err) throw `Database Error! ${err}`
+        // db.query(`
+        // SELECT chefs.*, count(recipes) AS total_recipes
+        // FROM chefs
+        // LEFT JOIN recipes ON (recipes.chef_id = chefs.id)
+        // GROUP BY chefs.id`, function(err, results) {
+        //         if(err) throw `Database Error! ${err}`
 
+        db.query(`
+            SELECT * FROM recipes`, function(err, results) {
+                if(err) throw `Database Error! ${err}`
+                
                 callback(results.rows)
-            })
+            }) 
+
+            
     },
     create(data, callback) {
         const query = `
@@ -94,6 +100,18 @@ module.exports = {
             })
     },
 
+    allChefs(callback) {
+        db.query(`
+        SELECT chefs.*, count(recipes) AS total_recipes
+        FROM chefs
+        LEFT JOIN recipes ON (recipes.chef_id = chefs.id)
+        GROUP BY chefs.id`, function(err, results) {
+                if(err) throw `Database Error! ${err}`
+
+                callback(results.rows)
+        })
+
+    },
     createChef(data, callback) {
         const query = `
             INSERT INTO chefs (
@@ -125,17 +143,44 @@ module.exports = {
         ORDER BY total_recipes DESC`, [id], function(err, results) {
                 if(err) throw `Database Error! ${err}`
 
+                
                 callback(results.rows[0])
             })
+    },
+
+    deleteChef(id, callback) {
+        db.query(`DELETE FROM 
+                chefs 
+                WHERE id = $1`, [id], function(err, results) {
+                    if(err) throw `Database Error! ${err}`
+
+                    callback(results.rows)
+        })
+        
     },
 
     chefSelectOptions(callback) {
         db.query(`SELECT name, id FROM chefs`, function(err, results) {
             if(err) throw `Database Error! ${err}`
 
-            callback(results.rows)
+            callback()
         })
     },
+
+    recipesOfChefs(id, callback) {
+        db.query(`
+            SELECT recipes.*, count(recipes) AS total_recipes
+            FROM chefs
+            LEFT JOIN recipes ON (chefs.id = recipes.chef_id)
+            WHERE chefs.id = $1
+            GROUP BY recipes.id
+            ORDER BY total_recipes DESC`, [id], function(err, results) {
+                    if(err) throw `Database Error! ${err}`
+
+                    callback(results.rows)
+            }
+        )
+    } 
 
     // countRecipes(callback) {
     //     db.query(`

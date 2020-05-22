@@ -3,6 +3,8 @@ const Administration = require('../models/Administration')
 module.exports = {
     index(req, res){
         Administration.all(function(recipes){
+            
+            
             return res.render('admin/index', { recipes })
         }) 
         
@@ -99,18 +101,48 @@ module.exports = {
     },
     
     showChef(req, res) {
+
+        Administration.recipesOfChefs(req.params.id, function(recipes) {
+            
         Administration.findChef(req.params.id, function(chef) {
             if(!chef) return res.send('Chef not found!')
+            
+            return res.render('admin/detailChef', { chef, recipes })   
 
-            return res.render('admin/detailChef', { chef })   
-
-        
+    
+            })
         })
         
         
     },
+    listChefs(req, res) {
+        Administration.allChefs(function(chefs) {
+
+            return res.render('admin/listChefs', { chefs })
+        })
+    },
+
+    editChef(req, res) {
+        Administration.findChef(req.params.id, function(chef) {
+            if(!chef) return res.send('Chef not found!')
+
+            return res.render('admin/editChef', { chef })
+        })
+    },
+
+    deleteChef(req, res) {
+        Administration.findChef(req.body.id, function(chef) {
+            if(chef.total_recipes >= 1) {
+                return res.send(`Chef não pode ser deletado, pois possui ${chef.total_recipes} receitas`)   
+            }  
+        })
+        
+        Administration.deleteChef(req.body.id, function() {
+            
+            return res.redirect('admin/chefs')
+        })
+    }
 
    
-
 
 }

@@ -4,15 +4,43 @@
     {% block content %}
 
     <h3 class="admin-titles" >Chef: {{chef.name}}</h3>
+    
+    <a href="/admin/chefs/{{chef.id}}/edit">
     <button class="buttons">EDITAR</button>
+    </a>
       <div id="wrapper">
         <img src="{{chef.avatar_url}}" alt="{{chef.name}}">
         <h1>{{chef.name}}</h1>
+        {% if chef.total_recipes <= 1 %}
+        <h2>{{chef.total_recipes}} Receita</h2>
+        {% else %}
         <h2>{{chef.total_recipes}} Receitas</h2>
+        {% endif %}
+
+
     </div>
 
 <div class="chef-recipes">
+    <h3 class="admin-titles"> Receitas </h3>
 
+      {% for recipe in recipes %} 
+    
+    <div class="card">
+        <a href="/admin/recipes/{{recipe.id}}">
+        <div class="imgCard">
+            <img src="{{recipe.image}}" alt="">
+        </div>
+        </a>
+        <div class="recipe">
+            <p class="title">{{recipe.title}}</p>
+             <a href="/admin/recipes/{{recipe.id}}">Visualizar</a>
+            <p class="chef">{{recipe.chef}}</p>
+           
+        </div>
+    </div>
+    
+                
+        {% endfor %}
 </div>
 
     {% endblock content %}
